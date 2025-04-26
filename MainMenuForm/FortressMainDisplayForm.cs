@@ -18,6 +18,7 @@ namespace MainMenuForm
         public int DaySpeed { get; set; } = 1;
         public int CurrentDay { get; set; } = 0;
         public Task TimerTask { get; set; }
+        public bool IsTaskStarted { get; set; } = false;
 
         public delegate void ChangeTimeDelegate();
 
@@ -79,7 +80,7 @@ namespace MainMenuForm
             {
                 while (true)
                 {
-                    ChangeTimeEvent?.Invoke();
+                    Invoke(new Action(ChangeDayTime));
                     Thread.Sleep(1000);
                 }
             });
