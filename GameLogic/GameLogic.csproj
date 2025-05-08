@@ -44,8 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fortress.cs" />
+    <Compile Include="GeneratedProduct.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="Occupation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Race.cs" />
+    <Compile Include="Servant.cs" />
+    <Compile Include="StarterOne.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GameLogic
 {
-    public class Fortress
+    public static class Fortress
     {
-        public string FortressName { get; set; }
+        public static string FortressName { get; set; }
+        public static decimal Treasury { get; set; } = 0;
+        public static int CurrentDay { get; set; } = 0;
+        public static bool PortalUsed { get; set; } = false;
+        public static List<GeneratedProduct> CompletedProductsStorage = new List<GeneratedProduct>();
+        public static List<GeneratedProduct> ProductTypes = new List<GeneratedProduct>();
+        public static List<GeneratedProduct> SoldItems = new List<GeneratedProduct>();
+        public static List<Servant> Servants = new List<Servant>();
+        public static List<Race> Races = new List<Race>();
+        public static List<Occupation> Jobs = new List<Occupation>();
+        public static List<Notification> Notifications = new List<Notification>();
     }
 }

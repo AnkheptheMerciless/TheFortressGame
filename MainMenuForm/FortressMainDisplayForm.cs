@@ -1,90 +1,144 @@
 ﻿using GameLogic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MainMenuForm
 {
-    public partial class FortressMainDisplayForm: Form
+    public partial class FortressMainDisplayForm : Form
     {
-        Fortress Fortress;
-        public int DaySpeed { get; set; } = 1;
-        public int CurrentDay { get; set; } = 0;
-        public Task TimerTask { get; set; }
-        public bool IsTaskStarted { get; set; } = false;
+        Random rnd = new Random();
+        StarterOne Starter;
+        public int DayCountShow { get; set; } = 0;
+        Queue<Servant> servantsQueue = new Queue<Servant>();
 
-        public delegate void ChangeTimeDelegate();
-
-        public event ChangeTimeDelegate ChangeTimeEvent;
         public FortressMainDisplayForm()
         {
             InitializeComponent();
         }
         public FortressMainDisplayForm(string name) : this()
         {
-            Fortress = new Fortress
-            {
-                FortressName = name
-            };
+            Fortress.FortressName = name;
             FortressNameLabel.Text = name;
-            ChangeTimeEvent += ChangeDayTime;
-            StartTimerTask();
+            Starter = new StarterOne();
+            Starter.CreateRaces();
+            Starter.CreateJobs();
+            Starter.CreateProductTypes();
+            Starter.StartingResources();
 
         }
-
-        public void ChangeDayTime()
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (DayProgressBar.Value == 24)
+            DaySkip();
+            EndDayButton.Enabled = false;
+            Task.Run(() =>
             {
-                DayProgressBar.Value = 0;
-                CurrentDay += 1;
-                CurrentDayLabel.Text = $"Current Day: {CurrentDay}";
-            }
-            DayProgressBar.Value += DaySpeed;
-        }
-
-
-
-
-        private void DSpeedDownButton_Click(object sender, EventArgs e)
-        {
-            if (DaySpeed !=0)
-            {
-                DaySpeed -= 1;
-            }
-        }
-
-        private void DSpeedUpButton_Click(object sender, EventArgs e)
-        {
-            if (DaySpeed != 3)
-            {
-                DaySpeed += 1;
-            }
-        }
-
-        private void DaySpeedStop_Click(object sender, EventArgs e)
-        {
-            DaySpeed = 0;
-        }
-
-        private void StartTimerTask()
-        {
-            TimerTask = new Task(() =>
-            {
-                while (true)
+                Thread.Sleep(1000);
+                Invoke((Action)delegate
                 {
-                    Invoke(new Action(ChangeDayTime));
-                    Thread.Sleep(1000);
-                }
+                    EnableButton();
+                });
             });
-            TimerTask.Start();
+
+        }
+        private void EnableButton()
+        {
+            EndDayButton.Enabled = true;
+        }
+
+        private void StoragePicture_Click(object sender, EventArgs e)
+        {
+            StorageViewForm SVForm = new StorageViewForm(Fortress.CompletedProductsStorage);
+            SVForm.Show();
+        }
+
+        private void DownTownPicture_Click(object sender, EventArgs e)
+        {
+            ServantsShowForm SVForm = new ServantsShowForm(Fortress.Servants);
+            SVForm.Show();
+        }
+        public void DaySkip()
+        {
+            Fortress.CurrentDay += 1;
+            CurrentDayLabel.Text = $"Current Day: {Fortress.CurrentDay}";
+            ServantDay();
+            DayIncome();
+            PricesUp();
+            NotificationsUpdate();
+            Fortress.PortalUsed = false;
+        }
+
+        public void DayIncome()
+        {
+            Fortress.Treasury += 10;
+            MoneyLabel.Text = $"Treasury: {Fortress.Treasury}";
+        }
+
+        public void NotificationsUpdate()
+        {
+            NotificationsBox.Items.Clear();
+            foreach (var notification in Fortress.Notifications)
+            {
+                NotificationsBox.Items.Add(notification);
+            }
+            Fortress.Notifications.Clear();
+        }
+
+        public void PricesUp()
+        {
+            int chanceOfChanging = 0;
+            foreach (var item in Fortress.ProductTypes)
+            {
+                chanceOfChanging = rnd.Next(1, 10);
+                if (chanceOfChanging == 1)
+                {
+                    item.Price += 1;
+                }
+                if (Fortress.CompletedProductsStorage.Any(p => p.Name == item.Name))
+                {
+                    Fortress.CompletedProductsStorage.First(p => p.Name == item.Name).Price = item.Price;
+                }
+            }
+        }
+
+
+        public void ServantDay()
+        {
+            if (Fortress.Servants != null)
+            {
+                foreach (var servant in Fortress.Servants)
+                {
+                    servantsQueue.Enqueue(servant);
+                }
+                for (int i = 0; i <= servantsQueue.Count; i++)
+                {
+                    Servant servant = servantsQueue.Dequeue();
+                    servant.ServantIsEating();
+                    servant.ServantDoJob();
+                }
+            }
+        }
+
+        private void TradingPortalPicture_Click(object sender, EventArgs e)
+        {
+            if (Fortress.PortalUsed == false)
+            {
+                TradeForm form = new TradeForm();
+                form.ShowDialog();
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    MoneyLabel.Text = $"Treasury: {Fortress.Treasury}";
+                    Fortress.PortalUsed = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"The Portal will not work today anymore. You should think twice about what do you sell and when. Or you can spend your power to activate the Portal again...", "The Portal is inactive", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
         }
     }
 }

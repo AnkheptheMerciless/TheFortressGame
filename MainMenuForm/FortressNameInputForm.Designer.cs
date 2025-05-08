@@ -51,7 +51,7 @@
             // 
             // DoneButton
             // 
-            this.DoneButton.Location = new System.Drawing.Point(146, 86);
+            this.DoneButton.Location = new System.Drawing.Point(141, 86);
             this.DoneButton.Name = "DoneButton";
             this.DoneButton.Size = new System.Drawing.Size(75, 23);
             this.DoneButton.TabIndex = 2;
