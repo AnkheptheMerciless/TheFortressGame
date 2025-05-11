@@ -9,27 +9,40 @@ namespace GameLogic
             Race Fianku = new Race()
             {
                 Name = "Fianku",
+                Desc = "Ones of the most beautiful creatures you can find and their minds as magnificent as their snake beauty. " +
+                "Their pale skin with islands of green and blue scales on it creates a quite tempting view." +
+                "Though it can be immensely hard, don't keep'em in your bed for too long: don't forget that they must bring you money in the first place.",
                 HungerRate = 2,
                 MaxHunger = 10,
+                Beauty = 10,
                 Strength = 3,
                 Intelligence = 5
             };
             Race Gurdir = new Race()
             {
                 Name = "Gurdir",
+                Desc = "Big, strong and sturdy creatures with hoves and silky white hair. " +
+                "Mostly stubborn yet unwavering. " +
+                "You can use them well at different hard labors but remember that they become hungry very fast.",
                 HungerRate = 4,
                 MaxHunger = 8,
+                Beauty = 3,
                 Strength = 6,
                 Intelligence = 2
             };
             Race Lakeya = new Race()
             {
                 Name = "Lakeya",
+                Desc = "Common and very mediocore creatures living here and there. " +
+                "They have tails, little horns, usually two or more and a pair of big glowing eyes. " +
+                "Their skin is variety of pink, red and blue.",
                 HungerRate = 1,
                 MaxHunger = 8,
+                Beauty = 4,
                 Strength = 2,
                 Intelligence = 3
             };
+
             Fortress.Races.Add(Fianku);
             Fortress.Races.Add(Gurdir);
             Fortress.Races.Add(Lakeya);
@@ -38,20 +51,21 @@ namespace GameLogic
 
         public void CreateJobs()
         {
-            Fortress.Jobs.Add(new Occupation("Forager")
+            Fortress.Jobs.Add(new Occupation("Forager", 1, 2, 100)
             {
-                StrengthAmplifier = 1,
-                IntelligenceAmplifier = 2,
+                Level = 1,
             });
-            Fortress.Jobs.Add(new Occupation("WoodCutter")
+            Fortress.Jobs.Add(new Occupation("WoodCutter", 3, 1, 150)
             {
-                StrengthAmplifier = 3,
-                IntelligenceAmplifier = 1
+                Level = 1
             });
-            Fortress.Jobs.Add(new Occupation("Miner")
+            Fortress.Jobs.Add(new Occupation("Miner", 2, 1, 200)
             {
-                StrengthAmplifier = 2,
-                IntelligenceAmplifier = 1
+                Level = 1
+            });
+            Fortress.Jobs.Add(new Occupation("Houses", 0, 0, 100)
+            {
+                Level = 1
             });
 
         }
@@ -69,6 +83,7 @@ namespace GameLogic
             Fortress.CompletedProductsStorage.First().Count = 5;
 
 
+
         }
         public void CreateProductTypes()
         {
@@ -79,7 +94,7 @@ namespace GameLogic
                 BelongsToOccup = Fortress.Jobs.First(j => j.Name == "Forager"),
                 Price = 2,
                 AmountOfWorkNeed = 4,
-                Saturation = 4,
+                Saturation = 2,
                 ObtainDifficulty = 3
             });
 
@@ -88,7 +103,7 @@ namespace GameLogic
             {
                 Name = "Wood",
                 BelongsToOccup = Fortress.Jobs.First(j => j.Name == "WoodCutter"),
-                Price = 1,
+                Price = 4,
                 AmountOfWorkNeed = 20,
                 Saturation = 0,
                 ObtainDifficulty = 1
@@ -97,12 +112,12 @@ namespace GameLogic
             //Miner//
             Fortress.ProductTypes.Add(new GeneratedProduct()
             {
-                Name = "Copper",
+                Name = "Stone",
                 BelongsToOccup = Fortress.Jobs.First(j => j.Name == "Miner"),
-                Price = 25,
-                AmountOfWorkNeed = 30,
+                Price = 2,
+                AmountOfWorkNeed = 20,
                 Saturation = 0,
-                ObtainDifficulty = 3
+                ObtainDifficulty = 1
             });
         }
 

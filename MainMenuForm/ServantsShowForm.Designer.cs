@@ -50,9 +50,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(353, 411);
+            this.button1.Location = new System.Drawing.Point(197, 411);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(392, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Change Job";
             this.button1.UseVisualStyleBackColor = true;
@@ -65,7 +65,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ServantsGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ServantsShowForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Servants";
             ((System.ComponentModel.ISupportInitialize)(this.ServantsGridView)).EndInit();
             this.ResumeLayout(false);

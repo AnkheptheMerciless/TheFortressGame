@@ -52,6 +52,7 @@
             this.MMLoadGameButton.TabIndex = 1;
             this.MMLoadGameButton.Text = "Load Game";
             this.MMLoadGameButton.UseVisualStyleBackColor = true;
+            this.MMLoadGameButton.Click += new System.EventHandler(this.MMLoadGameButton_Click);
             // 
             // MMExitButton
             // 
@@ -61,6 +62,7 @@
             this.MMExitButton.TabIndex = 2;
             this.MMExitButton.Text = "Exit";
             this.MMExitButton.UseVisualStyleBackColor = true;
+            this.MMExitButton.Click += new System.EventHandler(this.MMExitButton_Click);
             // 
             // label1
             // 
@@ -83,7 +85,9 @@
             this.Controls.Add(this.MMExitButton);
             this.Controls.Add(this.MMLoadGameButton);
             this.Controls.Add(this.MMNewGameButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainMenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Menu";
             this.ResumeLayout(false);
             this.PerformLayout();

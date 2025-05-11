@@ -37,22 +37,24 @@
             this.SellButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.LabelGain = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StorageItemsBox
             // 
             this.StorageItemsBox.FormattingEnabled = true;
-            this.StorageItemsBox.Location = new System.Drawing.Point(12, 25);
+            this.StorageItemsBox.Location = new System.Drawing.Point(12, 51);
             this.StorageItemsBox.Name = "StorageItemsBox";
-            this.StorageItemsBox.Size = new System.Drawing.Size(207, 368);
+            this.StorageItemsBox.Size = new System.Drawing.Size(207, 316);
             this.StorageItemsBox.TabIndex = 0;
             // 
             // SoldItemsBox
             // 
             this.SoldItemsBox.FormattingEnabled = true;
-            this.SoldItemsBox.Location = new System.Drawing.Point(300, 25);
+            this.SoldItemsBox.Location = new System.Drawing.Point(300, 51);
             this.SoldItemsBox.Name = "SoldItemsBox";
-            this.SoldItemsBox.Size = new System.Drawing.Size(207, 368);
+            this.SoldItemsBox.Size = new System.Drawing.Size(207, 316);
             this.SoldItemsBox.TabIndex = 1;
             // 
             // FromLeftToRightSingle
@@ -108,26 +110,46 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 9);
+            this.label1.Location = new System.Drawing.Point(52, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.Size = new System.Drawing.Size(122, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Fortress\' Storage";
+            this.label1.Text = "FORTRESS\' STORAGE";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(385, 9);
+            this.label2.Location = new System.Drawing.Point(379, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "For Sale";
+            this.label2.Text = "FOR SALE";
+            // 
+            // LabelGain
+            // 
+            this.LabelGain.AutoSize = true;
+            this.LabelGain.Location = new System.Drawing.Point(300, 374);
+            this.LabelGain.Name = "LabelGain";
+            this.LabelGain.Size = new System.Drawing.Size(72, 13);
+            this.LabelGain.TabIndex = 9;
+            this.LabelGain.Text = "You will gain: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(220, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "*Here you can sell products from your stocks.";
             // 
             // TradeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.LabelGain);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SellButton);
@@ -137,7 +159,9 @@
             this.Controls.Add(this.FromLeftToRightSingle);
             this.Controls.Add(this.SoldItemsBox);
             this.Controls.Add(this.StorageItemsBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TradeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Portal";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,5 +179,7 @@
         private System.Windows.Forms.Button SellButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LabelGain;
+        private System.Windows.Forms.Label label3;
     }
 }

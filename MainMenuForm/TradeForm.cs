@@ -19,133 +19,26 @@ namespace MainMenuForm
                 ProdsInStorageStash.Add((GeneratedProduct)item.Clone());
             }
             StorageItemsBox.Items.AddRange(ProdsInStorageStash.ToArray());
+            StorageItemsBox.SelectedIndex = 0;
         }
 
         private void FromLeftToRightSingle_Click(object sender, EventArgs e)
         {
-            if (StorageItemsBox.SelectedItem != null)
-            {
-                GeneratedProduct chosen = (GeneratedProduct)StorageItemsBox.SelectedItem;
-                if (ProdsInSellStash.Any(p => p.Name == chosen.Name))
-                {
-                    if (chosen.Count > 0)
-                    {
-                        ProdsInSellStash.First(p => p.Name == chosen.Name).Count += 1;
-                        chosen.Count -= 1;
-                    }
-                }
-                else
-                {
-                    if (chosen.Count > 0)
-                    {
-                        chosen.Count -= 1;
-                        var newP = (GeneratedProduct)chosen.Clone();
-                        newP.Count = 1;
-                        ProdsInSellStash.Add(newP);
-                    }
-
-                }
-                if (chosen.Count == 0)
-                {
-                    ProdsInStorageStash.Remove(chosen);
-                }
-                UpdateLists();
-            }
+            MoveElement(StorageItemsBox, ProdsInStorageStash, ProdsInSellStash, false);
         }
         private void FromLeftToRightAll_Click(object sender, EventArgs e)
         {
-            if (StorageItemsBox.SelectedItem != null)
-            {
-                GeneratedProduct chosen = (GeneratedProduct)StorageItemsBox.SelectedItem;
-                if (ProdsInSellStash.Any(p => p.Name == chosen.Name))
-                {
-                    if (chosen.Count > 0)
-                    {
-                        ProdsInSellStash.First(p => p.Name == chosen.Name).Count += chosen.Count;
-                        chosen.Count -= chosen.Count;
-                    }
-                }
-                else
-                {
-                    if (chosen.Count > 0)
-                    {
-                        var newP = (GeneratedProduct)chosen.Clone();
-                        newP.Count = chosen.Count;
-                        chosen.Count -= chosen.Count;
-                        ProdsInSellStash.Add(newP);
-                    }
-
-                }
-                if (chosen.Count == 0)
-                {
-                    ProdsInStorageStash.Remove(chosen);
-                }
-                UpdateLists();
-            }
+            MoveElement(StorageItemsBox, ProdsInStorageStash, ProdsInSellStash, true);
         }
 
         private void FromRightToLeftSingle_Click(object sender, EventArgs e)
         {
-            if (SoldItemsBox.SelectedItem != null)
-            {
-                GeneratedProduct chosen = (GeneratedProduct)SoldItemsBox.SelectedItem;
-                if (ProdsInStorageStash.Any(p => p.Name == chosen.Name))
-                {
-                    if (chosen.Count > 0)
-                    {
-                        ProdsInStorageStash.First(p => p.Name == chosen.Name).Count += 1;
-                        chosen.Count -= 1;
-                    }
-                }
-                else
-                {
-                    if (chosen.Count > 0)
-                    {
-                        chosen.Count -= 1;
-                        var newP = (GeneratedProduct)chosen.Clone();
-                        newP.Count = 1;
-                        ProdsInStorageStash.Add(newP);
-                    }
-
-                }
-                if (chosen.Count == 0)
-                {
-                    ProdsInSellStash.Remove(chosen);
-                }
-                UpdateLists();
-            }
+            MoveElement(SoldItemsBox, ProdsInSellStash, ProdsInStorageStash, false);
         }
 
         private void FromRightToLeftAll_Click(object sender, EventArgs e)
         {
-            if (SoldItemsBox.SelectedItem != null)
-            {
-                GeneratedProduct chosen = (GeneratedProduct)SoldItemsBox.SelectedItem;
-                if (ProdsInStorageStash.Any(p => p.Name == chosen.Name))
-                {
-                    if (chosen.Count > 0)
-                    {
-                        ProdsInStorageStash.First(p => p.Name == chosen.Name).Count += chosen.Count;
-                        chosen.Count -= chosen.Count;
-                    }
-                }
-                else
-                {
-                    if (chosen.Count > 0)
-                    {
-                        var newP = (GeneratedProduct)chosen.Clone();
-                        newP.Count = chosen.Count;
-                        chosen.Count -= chosen.Count;
-                        ProdsInStorageStash.Add(newP);
-                    }
-
-                }
-                if (chosen.Count == 0)
-                {
-                    ProdsInSellStash.Remove(chosen);
-                }
-                UpdateLists();
-            }
+            MoveElement(SoldItemsBox, ProdsInSellStash, ProdsInStorageStash, true);
         }
 
         private void SellButton_Click(object sender, EventArgs e)
@@ -195,6 +88,79 @@ namespace MainMenuForm
             {
                 StorageItemsBox.Items.Add(item);
             }
+        }
+
+        private void MoveElement(ListBox boxFrom, List<GeneratedProduct> listFrom, List<GeneratedProduct> listTo, bool all)
+        {
+            if (boxFrom.SelectedItem != null)
+            {
+                GeneratedProduct chosen = (GeneratedProduct)boxFrom.SelectedItem;
+                var selectIndex = boxFrom.SelectedIndex;
+                if (listTo.Any(p => p.Name == chosen.Name))
+                {
+                    if (chosen.Count > 0)
+                    {
+                        if (all == true)
+                        {
+                            listTo.First(p => p.Name == chosen.Name).Count += chosen.Count;
+                            chosen.Count -= chosen.Count;
+                        }
+                        else
+                        {
+                            listTo.First(p => p.Name == chosen.Name).Count += 1;
+                            chosen.Count -= 1;
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (chosen.Count > 0)
+                    {
+                        if (all == true)
+                        {
+                            var newP = (GeneratedProduct)chosen.Clone();
+                            newP.Count = chosen.Count;
+                            chosen.Count -= chosen.Count;
+                            listTo.Add(newP);
+                        }
+                        else
+                        {
+                            var newP = (GeneratedProduct)chosen.Clone();
+                            chosen.Count -= 1;
+                            newP.Count = 1;
+                            listTo.Add(newP);
+                        }
+
+                    }
+
+                }
+                if (chosen.Count == 0)
+                {
+                    listFrom.Remove(chosen);
+
+                }
+                ChangeGainLabel();
+                UpdateLists();
+                if (boxFrom.Items.Count > 0)
+                {
+                    boxFrom.SelectedIndex = selectIndex;
+                }
+            }
+        }
+
+        private void ChangeGainLabel()
+        {
+            decimal totalGain = 0;
+            if (ProdsInSellStash.Count > 0)
+            {
+                foreach (var item in ProdsInSellStash)
+                {
+                    totalGain += item.Price * item.Count;
+                }
+
+            }
+            LabelGain.Text = $"You'll gain: {totalGain}";
         }
     }
 }

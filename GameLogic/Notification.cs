@@ -1,5 +1,8 @@
-﻿namespace GameLogic
+﻿using System;
+
+namespace GameLogic
 {
+    [Serializable]
     public class Notification
     {
         public string Name { get; set; }

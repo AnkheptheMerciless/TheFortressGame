@@ -25,8 +25,9 @@ namespace MainMenuForm
             if (form.DialogResult == DialogResult.OK)
             {
                 servant.Occupation = form.Occupation;
+                servant.ProccesingProduct = null;
             }
-            this.Update();
+            ServantsGridView.Refresh();
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace GameLogic
 {
+    [Serializable]
     public class GeneratedProduct : ICloneable
     {
 
@@ -10,9 +11,9 @@ namespace GameLogic
         public int Saturation { get; set; }
         public int Count { get; set; }
         public int ObtainDifficulty { get; set; }
-        public Occupation BelongsToOccup { get; set; }
         public int AmountOfWorkNeed { get; set; }
         public int CurrentWorkProgress { get; set; } = 0;
+        public Occupation BelongsToOccup { get; set; }
 
         public override string ToString()
         {

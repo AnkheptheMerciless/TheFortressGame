@@ -1,25 +1,32 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace GameLogic
 {
+    [Serializable]
     public class Servant
     {
         public string Name { get; set; }
+        public int Hunger { get; set; }
+        public bool IsRestingToday { get; set; } = false;
+        public GeneratedProduct ProccesingProduct { get; set; }
         public Occupation Occupation { get; set; }
         public Race Race { get; set; }
-        public int Hunger { get; set; }
-        public GeneratedProduct ProccesingProduct { get; set; }
         public Servant(string name, Race race)
         {
             Name = name;
             Race = race;
             Hunger = Race.MaxHunger;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
         public void ServantDoJob()
         {
-            if (Occupation != null)
+            if (Occupation != null && IsRestingToday != true)
             {
-
                 if (ProccesingProduct == null)
                 {
                     AddProduct();
@@ -45,7 +52,7 @@ namespace GameLogic
         public void ServantIsEating()
         {
             bool notyCreated = false;
-            while (Hunger <= Race.MaxHunger / 2)
+            while (Hunger < Race.MaxHunger)
             {
                 if (Fortress.CompletedProductsStorage.Any(p => p.Saturation > 0))
                 {
@@ -71,6 +78,7 @@ namespace GameLogic
                 {
                     AddNotify("Lack of Food!");
                     notyCreated = true;
+                    break;
                 }
             }
         }
@@ -78,9 +86,9 @@ namespace GameLogic
         public void ServantIsWorking()
         {
             if (Race.Intelligence * Occupation.IntelligenceAmplifier > Race.Strength * Occupation.StrengthAmplifier)
-                ProccesingProduct.CurrentWorkProgress += Race.Intelligence * Occupation.IntelligenceAmplifier;
+                ProccesingProduct.CurrentWorkProgress += Race.Intelligence * Occupation.IntelligenceAmplifier + (Occupation.Level - 1);
             else if (Race.Intelligence * Occupation.IntelligenceAmplifier < Race.Strength * Occupation.StrengthAmplifier)
-                ProccesingProduct.CurrentWorkProgress += Race.Strength * Occupation.StrengthAmplifier;
+                ProccesingProduct.CurrentWorkProgress += Race.Strength * Occupation.StrengthAmplifier + (Occupation.Level - 1);
             if (ProccesingProduct.CurrentWorkProgress > ProccesingProduct.AmountOfWorkNeed)
             {
                 var additionalCount = ProccesingProduct.CurrentWorkProgress / ProccesingProduct.AmountOfWorkNeed;

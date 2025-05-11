@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MainMenuForm
@@ -16,8 +17,12 @@ namespace MainMenuForm
             ServNameBox.Text = servant.Name;
             foreach (var item in Fortress.Jobs)
             {
-                OccupComboBox.Items.Add(item);
+                if (item != Fortress.Jobs.First(o => o.Name == "Houses"))
+                {
+                    OccupComboBox.Items.Add(item);
+                }
             }
+            OccupComboBox.SelectedItem = servant.Occupation;
 
         }
 

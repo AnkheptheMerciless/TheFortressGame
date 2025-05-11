@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 9);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(236, 13);
             this.label1.TabIndex = 0;
@@ -45,13 +45,14 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 25);
+            this.textBox1.MaxLength = 20;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(350, 20);
+            this.textBox1.Size = new System.Drawing.Size(236, 20);
             this.textBox1.TabIndex = 1;
             // 
             // DoneButton
             // 
-            this.DoneButton.Location = new System.Drawing.Point(141, 86);
+            this.DoneButton.Location = new System.Drawing.Point(93, 51);
             this.DoneButton.Name = "DoneButton";
             this.DoneButton.Size = new System.Drawing.Size(75, 23);
             this.DoneButton.TabIndex = 2;
@@ -63,11 +64,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 121);
+            this.ClientSize = new System.Drawing.Size(258, 78);
             this.Controls.Add(this.DoneButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FortressNameInputForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Name";
             this.ResumeLayout(false);
             this.PerformLayout();

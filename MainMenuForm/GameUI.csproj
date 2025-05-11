@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreationHalls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreationHalls.Designer.cs">
+      <DependentUpon>CreationHalls.cs</DependentUpon>
+    </Compile>
     <Compile Include="FortressMainDisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,18 @@
     </Compile>
     <Compile Include="MainMenuForm.Designer.cs">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManufactoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManufactoryForm.Designer.cs">
+      <DependentUpon>ManufactoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverlordChambers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverlordChambers.Designer.cs">
+      <DependentUpon>OverlordChambers.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +108,9 @@
     <Compile Include="TradeForm.Designer.cs">
       <DependentUpon>TradeForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreationHalls.resx">
+      <DependentUpon>CreationHalls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FortressMainDisplayForm.resx">
       <DependentUpon>FortressMainDisplayForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +119,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenuForm.resx">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManufactoryForm.resx">
+      <DependentUpon>ManufactoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverlordChambers.resx">
+      <DependentUpon>OverlordChambers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
